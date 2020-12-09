@@ -90,7 +90,6 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'market.User'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -102,8 +101,6 @@ DATABASES = {
         'PASSWORD':'Access',
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 

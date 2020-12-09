@@ -1,2 +1,2 @@
-web: gunicorn market.wsgi --log-file -
+web: gunicorn myterious_goose.wsgi --log-file -
 
