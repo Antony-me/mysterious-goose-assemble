@@ -12,5 +12,4 @@ app_name='supermall'
 
 urlpatterns =[
     path('', include(router.urls)),
-    # path('registration/', views.registration_view, name="register")
 ]
