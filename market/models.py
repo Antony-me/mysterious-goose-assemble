@@ -52,7 +52,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(_('active'), default=True)
     is_staff = models.BooleanField(
         _('staff status'),
-        default=True,
+        default=False,
         help_text=_('Designates whether the user can log into this admin site.'),
     )
     avatar =CloudinaryField('image', validators=[FileExtensionValidator(['png', 'jpg', 'jpeg'])], blank=True)
