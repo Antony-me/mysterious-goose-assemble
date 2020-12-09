@@ -1,14 +1,9 @@
-from django.shortcuts import render
-from rest_framework.views import APIView
-from .serializer import ProductSerializer, MallSerializer, ShopSerializer
+from .serializer import ProductSerializer, MallSerializer, ShopSerializer, UserSerializer
 from rest_framework.response import Response
-from django.contrib.auth.models import User
 from .models import Product, Mall, Shop
-from rest_framework import mixins, viewsets
-from django.views.decorators.csrf import csrf_exempt
+from rest_framework import viewsets
 from rest_framework.decorators import api_view
-
-
+from rest_framework import status
 
 class ProductList(viewsets.ModelViewSet):
         queryset = Product.objects.all()
@@ -44,3 +39,19 @@ class MallList(viewsets.ModelViewSet):
                 serializers.save()
                 return Response(serializers.data, status=status.HTTP_201_CREATED)
             return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST',])
+def registration_view(request):
+    if request.method == 'POST':
+        serializer= UserSerializer(data=request.data)
+        data= {}
+        if serializer.is_valid():
+            user= serializer.save()
+            # data['response']= 'succefully registered a new user'
+            data['email']=user.email
+            data['first_name']=user.first_name
+            data['last_name']=user.last_name
+        else:
+            data=serializer.errors
+        return Response(data)
+
