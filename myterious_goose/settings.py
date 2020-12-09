@@ -32,7 +32,7 @@ SECRET_KEY = '%*77hfjyoe5cidxnjpow!e793tj2auwr!-4$j_&bvo(@(*@zpi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysterious-goose.herokuapp.com']
 
 
 # Application definition

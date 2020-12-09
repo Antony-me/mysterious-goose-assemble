@@ -55,7 +55,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=True,
         help_text=_('Designates whether the user can log into this admin site.'),
     )
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    avatar =CloudinaryField('image', validators=[FileExtensionValidator(['png', 'jpg', 'jpeg'])], blank=True)
 
     objects = UserManager()
 
@@ -85,24 +85,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
-# class Profile(models.Model):
-#     user=models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-#     first_name=models.CharField(max_length=200, blank=False)
-#     last_name=models.CharField(max_length=200, blank=True)
-#     photo =CloudinaryField('image', default="https://res.cloudinary.com/dpcrhvllf/image/upload/v1606208498/ouao15vmh1c1wecxm5ir.pngs")
-#     bio = models.TextField(default="No Bio..")
-
-#     def __str__(self):
-#         return f"{self.last_name}"
-
-#     @receiver(post_save, sender=User)
-#     def create_user_profile(sender, instance, created, **kwargs):
-#         if created:
-#             Profile.objects.create(user=instance)
-
-#     @receiver(post_save, sender=User)
-#     def save_user_profile(sender, instance, **kwargs):
-#         instance.profile.save()
 
 class Mall(models.Model):
     name = models.CharField(max_length=200, blank=False)
