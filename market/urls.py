@@ -8,7 +8,7 @@ router=DefaultRouter()
 router.register("api/products", views.ProductList, basename='Product')
 router.register("api/malls", views.MallList, basename='Mall')
 router.register("api/shops", views.ShopList, basename='Shop')
-router.register("api/users", views.UserList, basename='User')
+# router.register("api/users", views.UserList, basename='User')
 
 
 app_name='market'

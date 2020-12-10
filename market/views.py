@@ -4,56 +4,52 @@ from .models import Product, Mall, Shop, User
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from .permission import IsAdminOrReadOnly
+
+
+
 
 class ProductList(viewsets.ModelViewSet):
-        queryset = Product.objects.all()
-        serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
-        def post(self, request, format=None):
-            serializers = ProductSerializer(data=request.data)
-            if serializers.is_valid():
-                serializers.save()
-                return Response(serializers.data, status=status.HTTP_201_CREATED)
-            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    def post(self, request, format=None):
+        serializers = ProductSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
   
 class ShopList(viewsets.ModelViewSet):
-   
-        queryset = Shop.objects.all()
-        serializer_class = ShopSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Shop.objects.all()
+    serializer_class = ShopSerializer
 
-        def post(self, request, format=None):
-            serializers = ShopSerializer(data=request.data)
-            if serializers.is_valid():
-                serializers.save()
-                return Response(serializers.data, status=status.HTTP_201_CREATED)
-            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    def post(self, request, format=None):
+        serializers = ShopSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class UserList(viewsets.ModelViewSet):
-        queryset = User.objects.all()
-        serializer_class = UserSerializer
-
-        def post(self, request, format=None):
-            serializers = UserSerializer(data=request.data)
-            if serializers.is_valid():
-                serializers.save()
-                return Response(serializers.data, status=status.HTTP_201_CREATED)
-            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-  
-
-
-
+# class UserList(viewsets.ModelViewSet):
+    
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
 
 class MallList(viewsets.ModelViewSet):
-   
-        queryset = Mall.objects.all()
-        serializer_class = MallSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Mall.objects.all()
+    serializer_class = MallSerializer
 
-        def post(self, request, format=None):
-            serializers = ShopSerializer(data=request.data)
-            if serializers.is_valid():
-                serializers.save()
-                return Response(serializers.data, status=status.HTTP_201_CREATED)
-            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    def post(self, request, format=None):
+        serializers = ShopSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST',])
 def registration_view(request):
